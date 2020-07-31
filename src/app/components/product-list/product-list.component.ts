@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ProductsService } from 'src/app/services/products.service';
 import { Observable } from 'rxjs';
 import { Product } from 'src/app/models/product.model';
@@ -13,15 +13,22 @@ export class ProductListComponent implements OnInit {
 
   products: Product[] = [];
 
+  searchCriteria: string;
+
   constructor(private productsSerrvice: ProductsService) { }
 
 
-  public findByCriteria(criteria: string) {
-    return this.productsSerrvice.findProductsByCriteria(criteria);
+  public findByCriteria(_criteria: string) {
+    if(_criteria.length >= 3 || Number(_criteria)) {
+      this.productsSerrvice.findProductsByCriteria(_criteria).subscribe((infoProduct) => {
+        this.products = infoProduct;
+      });
+    }
+    
   }
 
   ngOnInit(): void {
-    this.findByCriteria('').subscribe((infoProduct) => {
+    this.productsSerrvice.findProductsByCriteria('').subscribe((infoProduct) => {
       this.products = infoProduct;
     });
   }

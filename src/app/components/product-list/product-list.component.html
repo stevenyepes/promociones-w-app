@@ -1,9 +1,36 @@
-<h2>Products</h2>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
+  integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+<div class="container">
+  <br />
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-10 col-lg-8">
+      <form class="card card-sm was-validated">
+        <div class="card-body row no-gutters align-items-center">
+          <div class="col-auto">
+            <i class="fas fa-search h4 text-body"></i>
+          </div>
+          <!--end of col-->
+          <div class="col">
+            <input (keyup)="findByCriteria(buscarTexto.value)"
+              class="form-control form-control-lg form-control-borderless form-control is-invalid" type="search"
+              placeholder="What are you searching for?" minlength="3" #buscarTexto>
+          </div>
+          <!--end of col-->
+          <div class="col-auto">
+            <button (click)="findByCriteria(buscarTexto.value)" class="btn btn-lg btn-success"
+              type="button">Search</button>
+          </div>
+          <!--end of col-->
+        </div>
+      </form>
+    </div>
+    <!--end of col-->
+  </div>
+</div>
 
 <div class="card-columns">
 
-<!-- *ngFor="let heroe of heroes; let i = index" -->
-  <app-product-card [product]="foo" [index]="i"  *ngFor="let foo of products; let i = index"></app-product-card>
+  <app-product-card [product]="product" [index]="i" *ngFor="let product of products; let i = index"></app-product-card>
 
 
 </div>

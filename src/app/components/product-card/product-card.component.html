@@ -1,15 +1,30 @@
-<div class="card animated fadeIn fast" >
-    <img class="card-img-top img-fluid" src="https://{{product.image}}" [alt]="product.id">
+<div class="card animated fadeIn fast">
+    <img class="card-img-top img-fluid" src="https://{{product.image}}" [alt]="product.brand">
     <div class="card-body">
-      <h4 class="card-title">{{ product.id }}</h4>
-      <p class="card-text"> {{ product.description }} </p>
-      <p class="card-text"><small class="text-muted">{{ product.price }}</small></p>
-  
-      <button
-        type="button" class="btn btn-outline-primary btn-block">
-        Ver más...
-      </button>
-      <!-- <a [routerLink]="['/heroe',i]" class="btn btn-outline-primary">Ver más link...</a> -->
-  
+        <h4 class="card-title"> <b>Brand: </b> {{ product.brand }}</h4>
+        <p class="card-text"> <b>Sumary:</b> {{ product.description }} </p>
+        <div *ngIf="product.priceWithDiscount; then thenBlock else elseBlock"></div>
+        <ng-template #thenBlock>
+            <p class="card-text ">
+                <small class="walmart-sales-price">
+                    <s>{{ product.price | currency:'CLP':'symbol-narrow' }}</s>
+                </small>
+            </p>
+            <p class="card-text ">
+                <small class="walmart-sales-price">
+                    {{ product.priceWithDiscount | currency:'CLP':'symbol-narrow' }}
+                </small>
+            </p>
+        </ng-template>
+        <ng-template #elseBlock>
+            <p class="card-text ">
+                <small class="walmart-sales-price">
+                    {{ product.price | currency:'CLP':'symbol-narrow' }}
+                </small>
+            </p>
+        </ng-template>
+        <button type="button" class="btn btn-outline-primary btn-block">
+            <i class='fas fa-cart-plus'></i>
+        </button>
     </div>
-  </div>
+</div>

@@ -1,4 +1,6 @@
+import { Product } from 'src/app/models/product.model';
+
 export const environment = {
   production: true,
-  apiUrl: 'https://promotions-walmart-app.herokuapp.com/'
+  apiUrl: 'https://promotions-walmart-api.herokuapp.com/products'
 };

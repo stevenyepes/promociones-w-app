@@ -13,14 +13,14 @@ export class ProductListComponent implements OnInit {
 
   products: Product[] = [];
 
-  searchCriteria: string;
+  isProductsReady: Boolean = false;
 
-  constructor(private productsSerrvice: ProductsService) { }
+  constructor(private productsService: ProductsService) { }
 
 
   public findByCriteria(_criteria: string) {
     if(_criteria.length >= 3 || Number(_criteria)) {
-      this.productsSerrvice.findProductsByCriteria(_criteria).subscribe((infoProduct) => {
+      this.productsService.findProductsByCriteria(_criteria).subscribe((infoProduct) => {
         this.products = infoProduct;
       });
     }
@@ -28,8 +28,9 @@ export class ProductListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.productsSerrvice.findProductsByCriteria('').subscribe((infoProduct) => {
+    this.productsService.findProductsByCriteria('').subscribe((infoProduct) => {
       this.products = infoProduct;
+      this.isProductsReady = true;
     });
   }
 

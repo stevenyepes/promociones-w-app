@@ -25,20 +25,6 @@ $ ng serve
 $ ng test
 ```
 
-## Ejecutando la aplicación
-- Se debe contar con la base de datos y el API ejecuntando (Ver requisitos).
-
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
 ## Docker
 
 ```bash

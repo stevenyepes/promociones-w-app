@@ -13,6 +13,6 @@ export class ProductsService {
 
   findProductsByCriteria: (string) => Observable<Product[]> = (criteria: string) => {
 
-    return this.httpClient.get<Product[]>(`http://localhost:3000/products/${criteria}`);
+    return this.httpClient.get<Product[]>(`https://promotions-walmart-api.herokuapp.com/products/${criteria}`);
   }
 }

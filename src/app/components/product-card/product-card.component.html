@@ -1,6 +1,7 @@
 <div class="card animated fadeIn fast">
     <img class="card-img-top img-fluid" src="https://{{product.image}}" [alt]="product.brand">
     <div class="card-body">
+        <h4 class="card-title"> <b>ID: </b> {{ product.id }}</h4>
         <h4 class="card-title"> <b>Brand: </b> {{ product.brand }}</h4>
         <p class="card-text"> <b>Sumary:</b> {{ product.description }} </p>
         <div *ngIf="product.priceWithDiscount; then thenBlock else elseBlock"></div>

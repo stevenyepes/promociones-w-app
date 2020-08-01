@@ -1,5 +1,4 @@
-name: Deploy
-
+name: Build an angular project 
 on:
   push:
     branches:
@@ -8,11 +7,31 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+
     steps:
-      - uses: actions/checkout@v2
-      - uses: akhileshns/heroku-deploy@v3.4.6 # This is the action
+      - uses: actions/checkout@v1
+      - name: Cache node modules
+        uses: actions/cache@v1
         with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "promotions-walmart-app" #Must be unique in Heroku
-          heroku_email: "jstevenyepes@gmail.com"
-          usedocker: true
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: push to heroku
+        env : 
+            HEROKU_REGISTRY_URL: registry.heroku.com
+            HEROKU_TOKEN : ${{ secrets.HEROKU_TOKEN }}
+        run : |
+            docker login --username=_ --password $HEROKU_TOKEN $HEROKU_REGISTRY_URL
+            export HEROKU_API_KEY=$HEROKU_TOKEN
+            heroku container:login
+            heroku container:push web --app promotions-walmart-app
+            heroku container:release web --app promotions-walmart-app
+            heroku ps:scale web=1 --app promotions-walmart-app

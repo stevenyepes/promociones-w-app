@@ -1,14 +1,19 @@
 ### STAGE 1: Build ###
-FROM node:12.7-alpine AS build
-WORKDIR /usr/src/app
-COPY package.json package-lock.json ./
-RUN npm install
-COPY . .
-RUN npm run build --prod
+FROM trion/ng-cli as builder
+RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
+WORKDIR /home/node/app
+COPY package.json package.json
+COPY package-lock.json package-lock.json
+USER node
+RUN npm ci  --debug
+COPY --chown=node:node . .
+RUN ng build --prod
+
 
 ### STAGE 2: RUN ###
-FROM nginx:1.17.1-alpine
+FROM nginx:1.17.5
+COPY default.conf.template /etc/nginx/conf.d/default.conf.template
 COPY nginx.conf /etc/nginx/nginx.conf
-COPY --from=build /usr/src/app/dist/prueba-full-stack-walmart-app /usr/share/nginx/html
-
-CMD sed -i -e 's/$PORT/'"$PORT"'/g' /etc/nginx/nginx.conf && nginx -g 'daemon off;'
+RUN ls
+COPY --from=builder /home/node/app/dist/prueba-full-stack-walmart-app /usr/share/nginx/html
+CMD /bin/bash -c "envsubst '\$PORT' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf" && nginx -g 'daemon off;'

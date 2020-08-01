@@ -1,27 +1,55 @@
 # PruebaFullStackWalmartApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.1.
+## Requisitos
+ - Docker
+ - Docker compose
+ - NodeJS (para ejecutar fuera de docker)
+ - Angular CLI
+ - [Base de datos de prueba] (https://github.com/walmartdigital/products-db)
+ - [Bakend para el proyecto] (https://github.com/stevenyepes/promociones-w-api)
+
+
+## Instalacción
+
+```bash
+$ npm install
+```
 
 ## Development server
+```bash
+$ ng serve
+```
+## Ejecutar test unitarios
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+```bash
+$ ng test
+```
 
-## Code scaffolding
+## Ejecutando la aplicación
+- Se debe contar con la base de datos y el API ejecuntando (Ver requisitos).
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```bash
+# development
+$ npm run start
 
-## Build
+# watch mode
+$ npm run start:dev
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+# production mode
+$ npm run start:prod
+```
 
-## Running unit tests
+## Docker
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```bash
+# Construir la imágen
+$ docker-compose build
 
-## Running end-to-end tests
+# Levantar entorno
+$ docker-compose up
+```
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+## Documentación
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+- Para ver la aplicación en local: http://localhost:4200/
+- El proyecto se encuentra desplegado en Heroku en el enlace (https://promotions-walmart-app.herokuapp.com/)

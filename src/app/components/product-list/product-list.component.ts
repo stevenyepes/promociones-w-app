@@ -19,17 +19,23 @@ export class ProductListComponent implements OnInit {
 
 
   public findByCriteria(_criteria: string) {
-    if(_criteria.length >= 3 || Number(_criteria)) {
+    this.isProductsReady = false;
+    _criteria = _criteria.trim()
+    
+    if(_criteria.length >= 3 || Number(_criteria) || _criteria.length === 0) {
       this.productsService.findProductsByCriteria(_criteria).subscribe((infoProduct) => {
-        this.products = infoProduct;
+        this.products = _criteria.length === 0 ? infoProduct.slice(0,200) : infoProduct; // just the first 200 products for performance
+        this.isProductsReady = true;
       });
+    } else {
+      this.isProductsReady = true;
     }
     
   }
 
   ngOnInit(): void {
     this.productsService.findProductsByCriteria('').subscribe((infoProduct) => {
-      this.products = infoProduct;
+      this.products = infoProduct.slice(0,200); // just the first 200 products for performance
       this.isProductsReady = true;
     });
   }

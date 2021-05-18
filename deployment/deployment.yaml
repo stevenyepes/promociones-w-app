@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: walmart-app
+  name: walmart-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: walmart-app
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: walmart-app
+    spec:
+      containers:
+      - image: localhost:5000/walmart-app
+        name: walmart-app
+        ports:
+        - containerPort: 80
+        resources: {}
+status: {}

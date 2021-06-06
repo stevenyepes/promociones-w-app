@@ -18,7 +18,7 @@ spec:
         app: walmart-app
     spec:
       containers:
-      - image: localhost:5000/walmart-app:1.0.0
+      - image: localhost:5000/walmart-app:1.0.1
         name: walmart-app
         ports:
         - containerPort: 80

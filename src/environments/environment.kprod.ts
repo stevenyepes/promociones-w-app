@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://walmart-api/products'
+  apiUrl: 'http://10.96.12.205:3000/products'
 };

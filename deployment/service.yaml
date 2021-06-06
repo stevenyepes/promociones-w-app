@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: walmart-app
+  name: walmart-app
+  namespace: walmart
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 4200
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: walmart-app
+status:
+  loadBalancer: {}

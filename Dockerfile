@@ -7,7 +7,7 @@ COPY package-lock.json package-lock.json
 USER node
 RUN npm ci  --debug
 COPY --chown=node:node . .
-RUN ng build --prod
+RUN ng build --configuration=kproduction
 
 
 ### STAGE 2: RUN ###

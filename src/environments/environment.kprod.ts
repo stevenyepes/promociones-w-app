@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://promotions-walmart-api.herokuapp.com/products'
+  apiUrl: 'http://10.96.12.205/products'
 };
